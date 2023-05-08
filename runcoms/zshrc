@@ -10,6 +10,14 @@ if [[ -s "${ZDOTDIR:-$HOME}/dotppl/prezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/dotppl/prezto/init.zsh"
 fi
 
+# Proxy settings
+nc -z 127.0.0.1 9000 \
+    && export http_proxy=http://127.0.0.1:9000/ \
+    && export https_proxy=http://127.0.0.1:9000/
+
+#export LANG=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
+
 # Customize to your needs...
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -24,4 +32,12 @@ else
     fi
 fi
 unset __conda_setup
-export PATH="/opt/homebrew/bin:$PATH"
+
+[ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:$PATH"
+
+unsetopt PATH_DIRS
+
+#load fzf
+[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
