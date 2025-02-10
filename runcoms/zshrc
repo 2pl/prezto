@@ -19,9 +19,8 @@ nc -z 127.0.0.1 9000 \
 if [[ -x "/usr/bin/wslview" ]]; then
   export BROWSER=wslview
   export REQUESTS_CA_BUNDLE=/etc/ssl/certs/Zscaler_cert.pem  
-  export CORALOGIX_API_KEY=1cbe5515-4a1d-4b33-8df1-a078baac53da
-  export GITLAB_API_TOKEN=glpat-ycg8GZ4SRKytiVFynQKf
 fi
+[ -f $HOME/.apikey ] && source $HOME/.apikey 
 
 #export LANG=en_US.UTF-8
 #export LC_ALL=en_US.UTF-8
