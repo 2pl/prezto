@@ -21,23 +21,30 @@ nc -z 127.0.0.1 9000 \
 # Customize to your needs...
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/ppl/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/ppl/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/Users/ppl/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/ppl/miniforge3/bin:$PATH"
-    fi
+# __conda_setup="$('/Users/ppl/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "/Users/ppl/miniforge3/etc/profile.d/conda.sh" ]; then
+#        . "/Users/ppl/miniforge3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/Users/ppl/miniforge3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
+export PATH="/opt/homebrew/bin:$PATH"
+
+# Activer fzf uniquement si la commande existe
+if command -v fzf >/dev/null 2>&1; then
+  # Méthode rapide : charger la config intégrée
+  source <(fzf --zsh)
 fi
-unset __conda_setup
+[ -f /opt/homebrew/share/zsh/site-functions ] && source /opt/homebrew/share/zsh/site-functions 
 
-[ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:$PATH"
+#
+# Colima configuration
+#
+export COLIMA_VM="default"
+export COLIMA_VM_SOCKET="${HOME}/.colima/${COLIMA_VM}/docker.sock"
+export DOCKER_HOST="unix://${COLIMA_VM_SOCKET}"
 
-unsetopt PATH_DIRS
-
-#load fzf
-[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
-[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
